@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80cfa948ea932524d952c7de09d998a3, type: 3}
+  m_Name: DBIndex
+  m_EditorClassIdentifier: 
+  monsterDB:
+  - id: 20001
+    resId: Slime
+    healthPoint: 15
+    defensePoint: 0
+    moveSpeed: 0.1
+  - id: 20002
+    resId: Bean
+    healthPoint: 15
+    defensePoint: 0
+    moveSpeed: 0.15
+  - id: 20003
+    resId: Bear
+    healthPoint: 15
+    defensePoint: 0
+    moveSpeed: 0.06
+  stageDB:
+  - id: 1
+    waveList:
+    - W1
+    - W2
+    - W3
+    - W4
+  waveDB:
+  - id: W1
+    monsters:
+    - 1:20001:10
+    - 2:20002:10:5
+    - 3:20003:10:3.5
+  - id: W2
+    monsters:
+    - 3:20001:15
+  - id: W3
+    monsters:
+    - 1:20001:15
+    - 2:20001:15
+  - id: W4
+    monsters:
+    - 3:20001:30
