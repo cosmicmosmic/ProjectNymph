@@ -14,6 +14,16 @@ public class MonsterDB
 }
 
 [Serializable]
+public class TowerDB
+{
+    public string id;
+    public string resId;
+    public long attackPoint;
+    public float attackDelay;
+    public float range;
+}
+
+[Serializable]
 public class WaveDB
 {
     public string id;
@@ -32,6 +42,7 @@ public class DB : Singleton<DB>
     public DBConst Const;
     private DBIndex index;
     public Dictionary<string, MonsterDB> dicMonDB = new Dictionary<string, MonsterDB>();
+    public Dictionary<string, TowerDB> dicTowerDB = new Dictionary<string, TowerDB>();
     public Dictionary<string, StageDB> dicStageDB = new Dictionary<string, StageDB>();
     public Dictionary<string, WaveDB> dicWaveDB = new Dictionary<string, WaveDB>();
 
@@ -41,6 +52,7 @@ public class DB : Singleton<DB>
         Const = Resources.Load<DBConst>("DB/DBConst");
         index = Resources.Load<DBIndex>("DB/DBIndex");
         LoadMonsterDB();
+        LoadTowerDB();
         LoadStageDB();
         LoadWaveDB();
     }
@@ -59,6 +71,24 @@ public class DB : Singleton<DB>
             else
             {
                 dicMonDB.Add(db.id, db);
+            }
+        }
+    }
+
+    private void LoadTowerDB()
+    {
+        dicTowerDB.Clear();
+        var towers = index.towerDB;
+        for (int i = 0; i < towers.Length; i++)
+        {
+            var db = towers[i];
+            if (dicTowerDB.ContainsKey(db.id))
+            {
+                Debug.LogWarning("이미 존재하는 타워 ID : " + db.id);
+            }
+            else
+            {
+                dicTowerDB.Add(db.id, db);
             }
         }
     }
@@ -104,6 +134,18 @@ public class DB : Singleton<DB>
         if (dicMonDB.ContainsKey(_id))
         {
             return dicMonDB[_id];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public TowerDB GetTowerDB(string _id)
+    {
+        if (dicTowerDB.ContainsKey(_id))
+        {
+            return dicTowerDB[_id];
         }
         else
         {

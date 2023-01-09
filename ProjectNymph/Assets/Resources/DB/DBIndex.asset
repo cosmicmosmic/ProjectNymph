@@ -28,6 +28,12 @@ MonoBehaviour:
     healthPoint: 15
     defensePoint: 0
     moveSpeed: 0.06
+  towerDB:
+  - id: 10001
+    resId: Cat
+    attackPoint: 1
+    attackDelay: 0.5
+    range: 1
   stageDB:
   - id: 1
     waveList:
