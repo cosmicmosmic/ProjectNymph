@@ -5,7 +5,7 @@ using UnityEngine;
 public class TowerUnit : MonoBehaviour
 {
     public TowerStat stat;
-    [SerializeField] private LineRenderer lineRange;
+    [SerializeField] private TowerRangeViewer rangeView;
     [SerializeField] private Animator anim;
 
     public void InitTower(TowerDB _db)
@@ -18,35 +18,22 @@ public class TowerUnit : MonoBehaviour
         stat.attackDelay = _db.attackDelay;
         stat.range = _db.range;
 
-        lineRange.gameObject.SetActive(false);
+        rangeView = GetComponent<TowerRangeViewer>();
+        if (rangeView == null)
+        {
+            rangeView = Instantiate(Resources.Load<TowerRangeViewer>("TowerUnits/Etc/RangeView"), transform);
+        }
+        rangeView.transform.localPosition = Vector3.zero;
+        rangeView.HideRange();
     }
 
-    [ContextMenu("Show Range")]
     public void ShowRange()
     {
-        if (lineRange == null)
-            return;
+        rangeView.ShowRange(stat.range);
+    }
 
-        lineRange.gameObject.SetActive(true);
-
-        var steps = 50;
-        var radius = stat.range;
-
-        lineRange.positionCount = steps;
-        for (int i = 0; i < steps; i++)
-        {
-            float progress = (float)i / steps;
-            float currRad = progress * 2 * Mathf.PI;
-
-            float xScaled = Mathf.Cos(currRad);
-            float yScaled = Mathf.Sin(currRad);
-
-            float x = xScaled * radius;
-            float y = yScaled * radius;
-
-            Vector3 currPos = new Vector3(x, y, 0f);
-
-            lineRange.SetPosition(i, currPos);
-        }
+    public void HideRange()
+    {
+        rangeView.HideRange();
     }
 }

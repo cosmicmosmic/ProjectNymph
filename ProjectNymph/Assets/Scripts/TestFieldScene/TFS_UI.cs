@@ -6,12 +6,14 @@ public class TFS_UI : MonoBehaviour
 {
     public GameObject goBottomButtons;
     public TFS_TowerMaker towerMaker;
+    public TileActionButton tileActionButton;
 
     public void InitUI()
     {
         towerMaker.InitMaker();
         towerMaker.gameObject.SetActive(false);
         goBottomButtons.SetActive(true);
+        tileActionButton.Close();
     }
 
     public void Test_OnClickStart()

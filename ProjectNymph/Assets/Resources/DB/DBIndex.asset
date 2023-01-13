@@ -33,7 +33,7 @@ MonoBehaviour:
     resId: Cat
     attackPoint: 1
     attackDelay: 0.5
-    range: 1
+    range: 1.8
   stageDB:
   - id: 1
     waveList:

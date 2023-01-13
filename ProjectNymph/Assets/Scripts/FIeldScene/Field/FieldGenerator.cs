@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class FieldGenerator : MonoBehaviour
 {
-    [SerializeField] private UnitTile prefabTile;
+    [SerializeField] private FieldTile prefabTile;
     [SerializeField] private Vector2 startPos;
     [SerializeField] private Vector2 tileSize;
 
     [SerializeField] private Vector2Int gridSize;
 
-    public List<UnitTile> GenerateField()
+    public List<FieldTile> GenerateField()
     {
         var x = gridSize.x;
         var y = gridSize.y;
-        List<UnitTile> list = new List<UnitTile>();
+        List<FieldTile> list = new List<FieldTile>();
 
         for (int i = 0; i < x; i++)
         {
@@ -28,10 +28,11 @@ public class FieldGenerator : MonoBehaviour
         return list;
     }
 
-    public UnitTile GenerateTile(float _localPosX, float _localPosY)
+    public FieldTile GenerateTile(float _localPosX, float _localPosY)
     {
         var tile = Instantiate(prefabTile, transform);
         tile.transform.localPosition = new Vector2(_localPosX, _localPosY);
+        tile.Refresh();
         return tile;
     }
 }
