@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameType;
 using System;
 
 [Serializable]
@@ -18,9 +19,24 @@ public class TowerDB
 {
     public string id;
     public string resId;
+    public string attackId;
+
+    public long attackPoint;//공격력
+    public float attackDelay;//딜레이
+    public float range;//사거리
+}
+
+[Serializable]
+public class AttackDB
+{
+    public string id;
+    public string resId;
+
+    public E_AttackType attackType;
+
     public long attackPoint;
-    public float attackDelay;
-    public float range;
+    public float bulletSpeed;
+
 }
 
 [Serializable]

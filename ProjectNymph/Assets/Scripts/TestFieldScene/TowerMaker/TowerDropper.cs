@@ -9,6 +9,9 @@ public class TowerDropper : MonoBehaviour
 
     public void SpawnTower(TowerDB _db)
     {
+        if (towerGrabbed != null)
+            return;
+
         towerGrabbed = Instantiate(Resources.Load<TowerUnit>(GetTowerDir(_db.resId)), transform);
         if (towerGrabbed != null)
         {

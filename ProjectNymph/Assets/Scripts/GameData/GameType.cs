@@ -9,4 +9,9 @@ namespace GameType
         IDLE,
         MOVE
     }
+
+    public enum E_AttackType
+    {
+        Bullet,
+    }
 }
