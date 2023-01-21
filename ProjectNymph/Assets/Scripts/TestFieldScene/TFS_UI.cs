@@ -18,8 +18,8 @@ public class TFS_UI : MonoBehaviour
 
     public void Test_OnClickStart()
     {
-        TestFieldScene.Inst.stageMgr.SetStage("1");
-        TestFieldScene.Inst.stageMgr.StartWave(0);
+        FM.Inst.stageMgr.SetStage("1");
+        FM.Inst.stageMgr.StartWave(0);
     }
 
     public void OnClickOpenTowerMaker()

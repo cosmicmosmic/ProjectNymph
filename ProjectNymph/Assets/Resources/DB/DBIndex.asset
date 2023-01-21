@@ -14,29 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterDB:
   - id: 20001
-    resId: Slime
-    healthPoint: 15
-    defensePoint: 0
-    moveSpeed: 0.1
+    res_id: Slime
+    health_point: 15
+    defense_point: 0
+    move_speed: 0.1
   - id: 20002
-    resId: Bean
-    healthPoint: 15
-    defensePoint: 0
-    moveSpeed: 0.15
+    res_id: Bean
+    health_point: 15
+    defense_point: 0
+    move_speed: 0.15
   - id: 20003
-    resId: Bear
-    healthPoint: 15
-    defensePoint: 0
-    moveSpeed: 0.06
+    res_id: Bear
+    health_point: 15
+    defense_point: 0
+    move_speed: 0.06
   towerDB:
   - id: 10001
-    resId: Cat
-    attackPoint: 1
-    attackDelay: 0.5
+    res_id: Cat
+    attack_id: Attack1
+    attack_point: 1
+    attack_delay: 0.5
     range: 1.8
+  attackDB:
+  - id: Attack1
+    res_id: Bullet1
+    attack_type: 0
+    attack_point: 1
+    bullet_speed: 10
   stageDB:
   - id: 1
-    waveList:
+    wave_list:
     - W1
     - W2
     - W3

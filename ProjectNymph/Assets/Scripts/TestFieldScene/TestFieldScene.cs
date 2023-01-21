@@ -5,10 +5,7 @@ using System;
 
 public class TestFieldScene : GameObjectSingleton<TestFieldScene>
 {
-    public FieldGenerator fieldGen;
-
-    public StageManager stageMgr;
-    public TowerDropper towerDropper;
+    public TFS_TowerDropper towerDropper;
     public TFS_UI ui;
 
     private List<FieldTile> listFieldTiles;
@@ -19,7 +16,7 @@ public class TestFieldScene : GameObjectSingleton<TestFieldScene>
         Application.targetFrameRate = 60;
         DB.Inst.Init();
 
-        listFieldTiles = fieldGen.GenerateField();
+        listFieldTiles = FM.Inst.fieldGen.GenerateField();
         SetOnClickFieldEmptyTile(towerDropper.DropTower);
         SetOnClickFieldTowerTile(ui.tileActionButton.ShowButton);
 

@@ -15,10 +15,37 @@ public class FieldTile : MonoBehaviour
     public TowerUnit Tower { get; private set; }
     public Block Block { get; private set; }
 
+    private string defaultName;
+    public void SetDefaultName(string _name)
+    {
+        defaultName = _name;
+        gameObject.name = _name;
+    }
+    private void RefreshName()
+    {
+#if UNITY_EDITOR
+        if (defaultName == null)
+            return;
+
+        string name = defaultName;
+
+        if (Tower != null)
+        {
+            name = string.Concat(name, " (T)");
+        }
+        if (Block != null)
+        {
+            name = string.Concat(name, " (B)");
+        }
+        gameObject.name = name;
+#endif
+    }
+
     public void Refresh()
     {
         goHighlight.SetActive(false);
         goSelected.SetActive(false);
+        RefreshName();
     }
 
     public void SpawnTower()
@@ -49,6 +76,7 @@ public class FieldTile : MonoBehaviour
         _tower.transform.localPosition = Vector3.zero;
         Tower = _tower;
         Tower.HideRange();
+        Refresh();
         return true;
     }
 

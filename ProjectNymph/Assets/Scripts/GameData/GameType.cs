@@ -12,6 +12,9 @@ namespace GameType
 
     public enum E_AttackType
     {
-        Bullet,
+        BULLET,
+        BOMB,
+        LASER,
+        NONE
     }
 }

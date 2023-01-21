@@ -6,18 +6,22 @@ public class TileActionButton : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     [SerializeField] private RectTransform root;
-    [SerializeField] private float width = 900f;
-    [SerializeField] private float height = 1850f;
+    [SerializeField] private RectTransform parent;
 
     private FieldTile currTile = null;
+
+    private void Awake()
+    {
+        parent = GetComponent<RectTransform>();
+    }
 
     public void ShowButton(FieldTile _tile)
     {
         gameObject.SetActive(true);
 
         var pos = cam.WorldToViewportPoint(_tile.transform.position);
-        pos.x *= width;
-        pos.y *= height;
+        pos.x *= parent.rect.width;
+        pos.y *= parent.rect.height;
 
         root.anchoredPosition = pos;
 

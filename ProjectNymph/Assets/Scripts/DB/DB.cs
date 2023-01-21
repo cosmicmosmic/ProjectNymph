@@ -8,21 +8,21 @@ using System;
 public class MonsterDB
 {
     public string id;
-    public string resId;
-    public long healthPoint;
-    public long defensePoint;
-    public float moveSpeed;
+    public string res_id;
+    public long health_point;
+    public long defense_point;
+    public float move_speed;
 }
 
 [Serializable]
 public class TowerDB
 {
     public string id;
-    public string resId;
-    public string attackId;
+    public string res_id;
+    public string attack_id;
 
-    public long attackPoint;//공격력
-    public float attackDelay;//딜레이
+    public long attack_point;//공격력
+    public float attack_delay;//딜레이
     public float range;//사거리
 }
 
@@ -30,12 +30,12 @@ public class TowerDB
 public class AttackDB
 {
     public string id;
-    public string resId;
+    public string res_id;
 
-    public E_AttackType attackType;
+    public E_AttackType attack_type;
 
-    public long attackPoint;
-    public float bulletSpeed;
+    public long attack_point;
+    public float bullet_speed;
 
 }
 
@@ -50,15 +50,17 @@ public class WaveDB
 public class StageDB
 {
     public string id;
-    public string[] waveList;
+    public string[] wave_list;
 }
 
 public class DB : Singleton<DB>
 {
     public DBConst Const;
+    public DefaultResource Res;
     private DBIndex index;
     public Dictionary<string, MonsterDB> dicMonDB = new Dictionary<string, MonsterDB>();
     public Dictionary<string, TowerDB> dicTowerDB = new Dictionary<string, TowerDB>();
+    public Dictionary<string, AttackDB> dicAttackDB = new Dictionary<string, AttackDB>();
     public Dictionary<string, StageDB> dicStageDB = new Dictionary<string, StageDB>();
     public Dictionary<string, WaveDB> dicWaveDB = new Dictionary<string, WaveDB>();
 
@@ -66,9 +68,11 @@ public class DB : Singleton<DB>
     public void Init()
     {
         Const = Resources.Load<DBConst>("DB/DBConst");
+        Res = Resources.Load<DefaultResource>("DefaultResource");
         index = Resources.Load<DBIndex>("DB/DBIndex");
         LoadMonsterDB();
         LoadTowerDB();
+        LoadAttackDB();
         LoadStageDB();
         LoadWaveDB();
     }
@@ -105,6 +109,24 @@ public class DB : Singleton<DB>
             else
             {
                 dicTowerDB.Add(db.id, db);
+            }
+        }
+    }
+
+    private void LoadAttackDB()
+    {
+        dicAttackDB.Clear();
+        var attacks = index.attackDB;
+        for (int i = 0; i < attacks.Length; i++)
+        {
+            var db = attacks[i];
+            if (dicAttackDB.ContainsKey(db.id))
+            {
+                Debug.LogWarning("이미 존재하는 공격 ID : " + db.id);
+            }
+            else
+            {
+                dicAttackDB.Add(db.id, db);
             }
         }
     }
@@ -162,6 +184,18 @@ public class DB : Singleton<DB>
         if (dicTowerDB.ContainsKey(_id))
         {
             return dicTowerDB[_id];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public AttackDB GetAttackDB(string _id)
+    {
+        if (dicAttackDB.ContainsKey(_id))
+        {
+            return dicAttackDB[_id];
         }
         else
         {

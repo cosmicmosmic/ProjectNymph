@@ -10,3 +10,8 @@ public class TowerStat
     public float attackDelay;
     public float range;
 }
+
+public class ShootStat
+{
+    public long attackPoint;
+}

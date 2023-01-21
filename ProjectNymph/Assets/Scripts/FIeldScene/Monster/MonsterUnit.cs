@@ -18,10 +18,10 @@ public class MonsterUnit : MonoBehaviour
         anim.speed = 1f;
 
         stat = new MonsterStat();
-        stat.maxHealthPoint = _db.healthPoint;
-        stat.healthPoint = _db.healthPoint;
-        stat.defensePoint = _db.defensePoint;
-        stat.moveSpeed = _db.moveSpeed;
+        stat.maxHealthPoint = _db.health_point;
+        stat.healthPoint = _db.health_point;
+        stat.defensePoint = _db.defense_point;
+        stat.moveSpeed = _db.move_speed;
 
         State = E_MonsterState.MOVE;
         currRallyIndex = 0;

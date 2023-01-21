@@ -21,6 +21,8 @@ public class FieldGenerator : MonoBehaviour
             for (int j = 0; j < y; j++)
             {
                 var tile = GenerateTile(i * tileSize.x + startPos.x, j * -tileSize.y + startPos.y);
+                tile.SetDefaultName(string.Format("({0}, {1})", i, j));
+                tile.Refresh();
                 list.Add(tile);
             }
         }
@@ -32,7 +34,6 @@ public class FieldGenerator : MonoBehaviour
     {
         var tile = Instantiate(prefabTile, transform);
         tile.transform.localPosition = new Vector2(_localPosX, _localPosY);
-        tile.Refresh();
         return tile;
     }
 }

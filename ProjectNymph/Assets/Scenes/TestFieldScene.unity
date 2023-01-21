@@ -1445,6 +1445,37 @@ Transform:
   m_Father: {fileID: 1520471710}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &617223836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 617223837}
+  m_Layer: 0
+  m_Name: EffectLayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &617223837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617223836}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1690986841}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &656144774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,7 +1717,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1690986841}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &795450339
 MonoBehaviour:
@@ -2306,8 +2337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
   root: {fileID: 1880749513}
-  width: 900
-  height: 1850
+  parent: {fileID: 0}
 --- !u!1 &1192222297
 GameObject:
   m_ObjectHideFlags: 0
@@ -7624,6 +7654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1690986841}
   - component: {fileID: 1690986842}
+  - component: {fileID: 1690986843}
   m_Layer: 0
   m_Name: FieldScene
   m_TagString: Untagged
@@ -7646,6 +7677,7 @@ Transform:
   - {fileID: 42268932}
   - {fileID: 5749780}
   - {fileID: 1520471710}
+  - {fileID: 617223837}
   - {fileID: 795450338}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -7663,10 +7695,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
-  fieldGen: {fileID: 5749781}
-  stageMgr: {fileID: 1520471711}
   towerDropper: {fileID: 795450339}
   ui: {fileID: 1739655965}
+--- !u!114 &1690986843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690986840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215d4f9adc009e74db7347398b6e2381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
+  fieldGen: {fileID: 5749781}
+  stageMgr: {fileID: 1520471711}
+  trEffectLayer: {fileID: 617223837}
 --- !u!1 &1710900005
 GameObject:
   m_ObjectHideFlags: 0
@@ -7997,7 +8043,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 400, y: 900}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1880749514

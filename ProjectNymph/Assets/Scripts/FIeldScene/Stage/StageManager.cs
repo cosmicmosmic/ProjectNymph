@@ -42,6 +42,8 @@ public class StageManager : MonoBehaviour
     [SerializeField] private Transform trMonsterSpawnRoot;
     public MonsterSpawnPoint[] spawnPoints;
 
+    public List<MonsterUnit> listMon = new List<MonsterUnit>();
+
 #if UNITY_EDITOR
     [ReadOnly]
 #endif
@@ -61,21 +63,18 @@ public class StageManager : MonoBehaviour
     public void ResetWave()
     {
         waveIndex = 0;
-        currWaveDB = GetWaveDB();
         StartCurrWave();
     }
 
     public void NextWave()
     {
         waveIndex++;
-        currWaveDB = GetWaveDB();
         StartCurrWave();
     }
 
     public void StartWave(int _round)
     {
         waveIndex = _round;
-        currWaveDB = GetWaveDB();
         StartCurrWave();
     }
 
@@ -84,14 +83,16 @@ public class StageManager : MonoBehaviour
         if (currStageDB == null)
             return null;
 
-        if (currStageDB.waveList.Length <= waveIndex || waveIndex < 0)
+        if (currStageDB.wave_list.Length <= waveIndex || waveIndex < 0)
             return null;
 
-        return DB.Inst.GetWaveDB(currStageDB.waveList[waveIndex]);
+        return DB.Inst.GetWaveDB(currStageDB.wave_list[waveIndex]);
     }
 
     private void StartCurrWave()
     {
+        currWaveDB = GetWaveDB();
+        listMon.Clear();
         if (currWaveDB == null)
             return;
 
@@ -110,7 +111,8 @@ public class StageManager : MonoBehaviour
         var spawnPoint = spawnPoints[info.pointId - 1];
         for (int i = 0; i < info.spawnCount; i++)
         {
-            spawnPoint.SpawnMonster(info.monsterId, trMonsterSpawnRoot);
+            var mon = spawnPoint.SpawnMonster(info.monsterId, trMonsterSpawnRoot);
+            listMon.Add(mon);
             yield return wait;
         }
     }

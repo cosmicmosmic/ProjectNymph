@@ -11,7 +11,7 @@ public class MonsterSpawnPoint : MonoBehaviour
     {
         var db = DB.Inst.GetMonsterDB(_id);
 
-        var unit = Instantiate(Resources.Load<MonsterUnit>(GetMonsterDir(db.resId)), _parent);
+        var unit = Instantiate(Resources.Load<MonsterUnit>(GetMonsterDir(db.res_id)), _parent);
         unit.transform.position = transform.position;
         unit.InitMonster(db, rallyPoints);
         return unit;
