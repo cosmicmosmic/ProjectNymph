@@ -7,21 +7,46 @@ public class MonsterUnit : MonoBehaviour
 {
     public MonsterStat stat;
     [SerializeField] private Animator anim;
+    [SerializeField] private Transform trRoot;
+    [SerializeField] private MonsterHpSupporter hp;
+    [SerializeField] private MonsterRangeSupporter range;
 
     public E_MonsterState State { get; private set; }
     private List<MonsterRallyPoint> listRally = new List<MonsterRallyPoint>();
     private int currRallyIndex = 0;
 
-    public void InitMonster(MonsterDB _db, MonsterRallyPoint[] _arrRally)
+    public void InitMonster(MonsterDB _db, MonsterRallyPoint[] _arrRally, int _zOrder)
     {
+        if (anim == null)
+        {
+            anim = GetComponentInChildren<Animator>();
+        }
+
         anim.SetBool("isWalk", true);
         anim.speed = 1f;
+
+        if (trRoot == null)
+        {
+            trRoot = transform.Find("root");
+        }
+
+        if (hp == null)
+        {
+            hp = GetComponentInChildren<MonsterHpSupporter>();
+        }
+
+        if (range == null)
+        {
+            range = GetComponentInChildren<MonsterRangeSupporter>();
+        }
 
         stat = new MonsterStat();
         stat.maxHealthPoint = _db.health_point;
         stat.healthPoint = _db.health_point;
         stat.defensePoint = _db.defense_point;
         stat.moveSpeed = _db.move_speed;
+
+        hp.SetHp(stat.healthPoint);
 
         State = E_MonsterState.MOVE;
         currRallyIndex = 0;
@@ -34,7 +59,34 @@ public class MonsterUnit : MonoBehaviour
             }
         }
 
+        SetZOrder(_zOrder);
         AdjustRallyPosition(true);
+    }
+
+    public void SetZOrder(int _zOrder)
+    {
+        var zPos = _zOrder * DB.Inst.Const.zOrderFactor;
+        var pos = trRoot.transform.localPosition;
+        pos.z = zPos;
+        trRoot.transform.localPosition = pos;
+
+        if (hp != null)
+        {
+            pos = hp.transform.localPosition;
+            pos.z = zPos;
+            hp.transform.localPosition = pos;
+
+            pos = hp.txtHp.transform.localPosition;
+            pos.z = DB.Inst.Const.zOrderFactor;
+            hp.txtHp.transform.localPosition = pos;
+        }
+
+        if (range != null)
+        {
+            pos = range.transform.localPosition;
+            pos.z = zPos;
+            range.transform.localPosition = pos;
+        }
     }
 
     private void Update()
@@ -138,8 +190,16 @@ public class MonsterUnit : MonoBehaviour
             transform.position = currRally.transform.position;
 
         if (currRally.direction.x < 0)
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+        {
+            var scale = new Vector3(-1f, 1f, 1f);
+            transform.localScale = scale;
+            hp.transform.localScale = scale;
+        }
         else if (currRally.direction.x > 0)
-            transform.localScale = new Vector3(1f, 1f, 1f);
+        {
+            var scale = new Vector3(1f, 1f, 1f);
+            transform.localScale = scale;
+            hp.transform.localScale = scale;
+        }
     }
 }

@@ -5,7 +5,7 @@ using TMPro;
 
 public class MonsterHpSupporter : MonoBehaviour
 {
-    [SerializeField] private TextMesh txtHp;
+    public TextMeshPro txtHp;
 
     public void SetHp(long _value)
     {

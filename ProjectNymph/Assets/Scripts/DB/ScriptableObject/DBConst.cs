@@ -11,4 +11,5 @@ public class DBConst : ScriptableObject
     [Header("소트오더 값")]
     public int sOrderRangedTower = 30;
     public int sOrderTower = 20;
+    public float zOrderFactor = -0.001f;//유닛사이에서 텍스트와유닛스프라이트가 겹치지않도록z값 조정
 }

@@ -7002,6 +7002,7 @@ MonoBehaviour:
   - {fileID: 569054788}
   - {fileID: 662917262}
   - {fileID: 2131781789}
+  listMon: []
   waveIndex: 0
 --- !u!1 &1564731841
 GameObject:
