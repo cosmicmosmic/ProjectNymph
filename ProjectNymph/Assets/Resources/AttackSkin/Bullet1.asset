@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Bullet1
   m_EditorClassIdentifier: 
   prefabShoot: {fileID: 0}
-  prefabBullet: {fileID: 0}
+  prefabBullet: {fileID: 5235020001453563957, guid: ed9d28e19521db74daec6f0b1625189b, type: 3}
   prefabHit: {fileID: 0}

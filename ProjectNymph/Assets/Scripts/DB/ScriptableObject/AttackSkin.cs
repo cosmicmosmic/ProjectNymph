@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackEffect : ScriptableObject
+public class AttackSkin : ScriptableObject
 {
     [SerializeField] private GameObject prefabShoot;
     [SerializeField] private GameObject prefabBullet;

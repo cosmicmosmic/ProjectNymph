@@ -27,6 +27,7 @@ public class TFS_TowerDropper : MonoBehaviour
 
         if (_tile.DropTower(towerGrabbed))
         {
+            towerGrabbed.StartWork();
             towerGrabbed = null;
         }
     }

@@ -1408,7 +1408,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b6d4275215b7d4e9652156215b6375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   rallyPoints:
   - {fileID: 1569158579}
   - {fileID: 948206931}
@@ -1455,7 +1454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 617223837}
   m_Layer: 0
-  m_Name: EffectLayer
+  m_Name: AttackLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1643,7 +1642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b6d4275215b7d4e9652156215b6375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   rallyPoints:
   - {fileID: 948206931}
   - {fileID: 91371582}
@@ -7713,7 +7711,7 @@ MonoBehaviour:
   dontDestroyOnLoad: 0
   fieldGen: {fileID: 5749781}
   stageMgr: {fileID: 1520471711}
-  trEffectLayer: {fileID: 617223837}
+  trAttackLayer: {fileID: 617223837}
 --- !u!1 &1710900005
 GameObject:
   m_ObjectHideFlags: 0
@@ -8536,7 +8534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b6d4275215b7d4e9652156215b6375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   rallyPoints:
   - {fileID: 91371582}
   - {fileID: 657830844}

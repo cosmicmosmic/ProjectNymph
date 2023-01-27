@@ -59,6 +59,8 @@ public class ObjectPool : GameObjectSingleton<ObjectPool>
         {
             var pool = dicPools[_prefab];
             _go.transform.SetParent(pool.trRoot);
+            _go.transform.position = new Vector3(9999f, 9999f, 9999f);
+            pool.stack.Push(_go);
             _go.SetActive(false);
         }
         else

@@ -17,10 +17,10 @@ public class ScriptableDBEditor : Editor
         AssetUtil.CreateScriptableObject<DBConst>();
     }
 
-    [MenuItem("Util/Create/AttackEffect")]
-    public static void CreateAttackEffect()
+    [MenuItem("Util/Create/AttackSkin")]
+    public static void CreateAttackSkin()
     {
-        AssetUtil.CreateScriptableObject<AttackEffect>();
+        AssetUtil.CreateScriptableObject<AttackSkin>();
     }
 
     [MenuItem("Util/Create/DefaultRes")]

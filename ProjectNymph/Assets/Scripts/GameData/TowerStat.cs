@@ -11,7 +11,9 @@ public class TowerStat
     public float range;
 }
 
-public class ShootStat
+[Serializable]
+public class AttackStat
 {
     public long attackPoint;
+    public float bulletSpeed;
 }

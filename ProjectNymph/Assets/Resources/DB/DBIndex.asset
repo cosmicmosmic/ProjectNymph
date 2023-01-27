@@ -35,12 +35,23 @@ MonoBehaviour:
     attack_point: 1
     attack_delay: 0.5
     range: 1.8
+  - id: 10002
+    res_id: Cat
+    attack_id: Attack2
+    attack_point: 0
+    attack_delay: 1.2
+    range: 2.5
   attackDB:
   - id: Attack1
     res_id: Bullet1
     attack_type: 0
     attack_point: 1
-    bullet_speed: 10
+    bullet_speed: 2
+  - id: Attack2
+    res_id: Seeker1
+    attack_type: 1
+    attack_point: 1
+    bullet_speed: 1.3
   stageDB:
   - id: 1
     wave_list:

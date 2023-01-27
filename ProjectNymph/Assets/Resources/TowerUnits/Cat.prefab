@@ -30,6 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2986441307229281321}
+  - {fileID: 4361681994891986861}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,7 +50,7 @@ MonoBehaviour:
     attackPoint: 0
     attackDelay: 0
     range: 0
-  rangeView: {fileID: 0}
+  shooter: {fileID: 4397170773190111975}
   anim: {fileID: 7214839526216960834}
 --- !u!1 &2986441307229281326
 GameObject:
@@ -83,6 +84,61 @@ Transform:
   m_Father: {fileID: 2986441306431951495}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4672129386300592037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4361681994891986861}
+  - component: {fileID: 4397170773190111975}
+  m_Layer: 0
+  m_Name: shooter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4361681994891986861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672129386300592037}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2986441306431951495}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4397170773190111975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672129386300592037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69ec117eda9d2d146a50ce8f7890edd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerStat:
+    attackPoint: 0
+    attackDelay: 0
+    range: 0
+  attackDB:
+    id: 
+    res_id: 
+    attack_type: 0
+    attack_point: 0
+    bullet_speed: 0
+  skin: {fileID: 0}
 --- !u!1 &7214839525899901302
 GameObject:
   m_ObjectHideFlags: 0

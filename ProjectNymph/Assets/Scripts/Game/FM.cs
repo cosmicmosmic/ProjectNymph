@@ -6,5 +6,5 @@ public class FM : GameObjectSingleton<FM>
 {
     public FieldGenerator fieldGen;
     public StageManager stageMgr;
-    public Transform trEffectLayer;
+    public Transform trAttackLayer;
 }

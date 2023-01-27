@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameType;
 
 public class TowerUnit : MonoBehaviour
 {
     public TowerStat stat;
     [SerializeField] private TowerAttackShooter shooter;
+    [SerializeField] private Animator anim;
 
-    [SerializeField] Animator anim;
-
+    public E_TowerState State { get; private set; }
     private TowerRangeSupporter rangeSupport;
     private SpriteRenderer spr;
+
+    private float currDelayTime = 0f;
+    private MonsterUnit followingTarget = null;
 
     public void InitTower(TowerDB _db)
     {
@@ -33,20 +37,69 @@ public class TowerUnit : MonoBehaviour
         rangeSupport.transform.localPosition = Vector3.zero;
         rangeSupport.HideRange();
 
-        shooter = GetComponent<TowerAttackShooter>();
+        shooter = GetComponentInChildren<TowerAttackShooter>();
         if (shooter == null)
         {
             shooter = gameObject.AddComponent<TowerAttackShooter>();
         }
         shooter.InitShooter(stat, _db.attack_id);
+
+        State = E_TowerState.IDLE;
+    }
+
+    public void StartWork()
+    {
+        State = E_TowerState.WORK;
     }
 
     private void Update()
     {
+        if (State == E_TowerState.IDLE)
+            return;
 
+        Update_FindAndShoot();
     }
 
-    private MonsterUnit FindTarget()
+    private void Update_FindAndShoot()
+    {
+        currDelayTime -= Time.deltaTime;
+        if (currDelayTime > 0f)
+            return;
+
+        currDelayTime -= Time.deltaTime;
+
+        MonsterUnit target;
+        if (followingTarget != null && IsRangedTarget(followingTarget))
+        {
+            target = followingTarget;
+        }
+        else
+        {
+            target = FindNearestTarget();
+            followingTarget = target;
+        }
+
+        if (target != null)
+        {
+            shooter.Fire(target);
+            currDelayTime = stat.attackDelay;
+        }
+    }
+
+    private bool IsRangedTarget(MonsterUnit _mon)
+    {
+        if (_mon == null || _mon.gameObject.activeSelf == false)
+            return false;
+
+        var range = stat.range;
+        var dist = Vector2.Distance(transform.position, _mon.transform.position);
+        if (dist <= range)
+            return true;
+        else
+            return false;
+    }
+
+    private MonsterUnit FindNearestTarget()
     {
         var range = stat.range;
         var list = FM.Inst.stageMgr.listMon;
@@ -55,6 +108,9 @@ public class TowerUnit : MonoBehaviour
         for (int i = 0; i < list.Count; i++)
         {
             var mon = list[i];
+            if (mon.gameObject.activeSelf == false)
+                continue;
+
             var dist = Vector2.Distance(transform.position, mon.transform.position);
             if (dist <= range && dist < nearestDist)
             {
@@ -87,8 +143,8 @@ public class TowerUnit : MonoBehaviour
     [ContextMenu("Find Target")]
     public void DebugFindTarget()
     {
-        var mon = FindTarget();
-        if(mon == null)
+        var mon = FindNearestTarget();
+        if (mon == null)
         {
             Debug.Log("사거리내에 타겟없음");
         }

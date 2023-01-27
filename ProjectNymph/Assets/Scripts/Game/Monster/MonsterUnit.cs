@@ -15,8 +15,12 @@ public class MonsterUnit : MonoBehaviour
     private List<MonsterRallyPoint> listRally = new List<MonsterRallyPoint>();
     private int currRallyIndex = 0;
 
-    public void InitMonster(MonsterDB _db, MonsterRallyPoint[] _arrRally, int _zOrder)
+    private GameObject prefabOrigin;
+
+    public void InitMonster(GameObject _prefab, MonsterDB _db, MonsterRallyPoint[] _arrRally, int _zOrder)
     {
+        prefabOrigin = _prefab;
+
         if (anim == null)
         {
             anim = GetComponentInChildren<Animator>();
@@ -117,7 +121,8 @@ public class MonsterUnit : MonoBehaviour
         }
     }
 
-    public MonsterRallyPoint CurrentRally()
+    #region Rally
+    private MonsterRallyPoint CurrentRally()
     {
         if (currRallyIndex < 0 || currRallyIndex >= listRally.Count)
             return null;
@@ -125,7 +130,7 @@ public class MonsterUnit : MonoBehaviour
         return listRally[currRallyIndex];
     }
 
-    public MonsterRallyPoint NextRally()
+    private MonsterRallyPoint NextRally()
     {
         var nextRallyIndex = (currRallyIndex + 1) % listRally.Count;
         if (nextRallyIndex < 0)
@@ -193,13 +198,48 @@ public class MonsterUnit : MonoBehaviour
         {
             var scale = new Vector3(-1f, 1f, 1f);
             transform.localScale = scale;
-            hp.transform.localScale = scale;
         }
         else if (currRally.direction.x > 0)
         {
             var scale = new Vector3(1f, 1f, 1f);
             transform.localScale = scale;
-            hp.transform.localScale = scale;
         }
+
+        hp.transform.localScale = transform.localScale;
+    }
+    #endregion
+
+    public void SetHealthPoint(long _value)
+    {
+        stat.healthPoint += _value;
+        if (hp != null)
+        {
+            hp.SetHp(stat.healthPoint);
+        }
+
+        if (stat.healthPoint <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Hit()
+    {
+
+    }
+
+    public void Die()
+    {
+
+    }
+
+    [ContextMenu("Despawn")]
+    public void DespawnUnit()
+    {
+        if (prefabOrigin == null)
+            return;
+
+        State = E_MonsterState.IDLE;
+        ObjectPool.Inst.Despawn(prefabOrigin, gameObject);
     }
 }
