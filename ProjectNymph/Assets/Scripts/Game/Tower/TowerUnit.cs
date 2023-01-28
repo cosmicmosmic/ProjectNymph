@@ -88,7 +88,7 @@ public class TowerUnit : MonoBehaviour
 
     private bool IsRangedTarget(MonsterUnit _mon)
     {
-        if (_mon == null || _mon.gameObject.activeSelf == false)
+        if (Util.IsVaildMonster(_mon) == false)
             return false;
 
         var range = stat.range;
@@ -108,7 +108,7 @@ public class TowerUnit : MonoBehaviour
         for (int i = 0; i < list.Count; i++)
         {
             var mon = list[i];
-            if (mon.gameObject.activeSelf == false)
+            if (Util.IsVaildMonster(mon) == false)
                 continue;
 
             var dist = Vector2.Distance(transform.position, mon.transform.position);

@@ -7,6 +7,7 @@ public class MonsterUnit : MonoBehaviour
 {
     public MonsterStat stat;
     [SerializeField] private Animator anim;
+    [SerializeField] private AnimationEventHandler animEvent;
     [SerializeField] private Transform trRoot;
     [SerializeField] private MonsterHpSupporter hp;
     [SerializeField] private MonsterRangeSupporter range;
@@ -26,8 +27,18 @@ public class MonsterUnit : MonoBehaviour
             anim = GetComponentInChildren<Animator>();
         }
 
+        anim.SetBool("isDie", false);
         anim.SetBool("isWalk", true);
         anim.speed = 1f;
+
+        if (animEvent == null)
+        {
+            animEvent = GetComponentInChildren<AnimationEventHandler>();
+            if (animEvent == null)
+            {
+                animEvent = anim.gameObject.AddComponent<AnimationEventHandler>();
+            }
+        }
 
         if (trRoot == null)
         {
@@ -38,6 +49,8 @@ public class MonsterUnit : MonoBehaviour
         {
             hp = GetComponentInChildren<MonsterHpSupporter>();
         }
+
+        hp.gameObject.SetActive(true);
 
         if (range == null)
         {
@@ -230,7 +243,16 @@ public class MonsterUnit : MonoBehaviour
 
     public void Die()
     {
+        State = E_MonsterState.IDLE;
+        hp.gameObject.SetActive(false);
+        anim.SetBool("isDie", true);
+        animEvent.onCompleteDie = OnCompleteDie;
+    }
 
+    private void OnCompleteDie()
+    {
+        animEvent.onCompleteDie = null;
+        DespawnUnit();
     }
 
     [ContextMenu("Despawn")]

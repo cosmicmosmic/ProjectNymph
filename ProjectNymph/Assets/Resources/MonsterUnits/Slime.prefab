@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 4193284874597805063}
   - component: {fileID: 4193284874597805062}
   - component: {fileID: 4193284874597805081}
+  - component: {fileID: 6180597398232089925}
   m_Layer: 0
   m_Name: Jelly 0
   m_TagString: Untagged
@@ -320,6 +321,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6180597398232089925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4193284874597805080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d54739d3560924ab2b18e0bdb8c91a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4613139134996463658
 GameObject:
   m_ObjectHideFlags: 0

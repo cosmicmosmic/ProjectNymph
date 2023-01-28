@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 86
+  controlID: 28
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 110
+  controlID: 54
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -339,21 +339,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 5e64fdff1e65fdfffe22feff1a23feff3823feff5423feff7223feff8e23feffac23feffc823feffe623feff0224feff2024feff3c24feff5a24feff7624feff9424feffb024feffce24feffea24feff0825feff2425feff4225feff5e25feff7c25feff9825feffe425feff0026feff2226feff3e26feff6026feff7c26fefff280feffb281feff24c1feff60c6feffecd1feff1cd2feffe4d2feffc4d6feff7613ffff9413ffff2c19fffff244ffff684affff4891ffff6e92ffff1efbfffff4ffffff786c00007c6c0000fa6c0000346d0000
+      m_ExpandedIDs: c42fffff4246ffffea6efffff46effff2a6fffff346fffff16f6ffff26fbffff7c6c0000fa6c0000346d00004c6d0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Seeker1(Clone)
-        m_OriginalName: Seeker1(Clone)
+        m_Name: root
+        m_OriginalName: root
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -175510
+        m_UserData: 38808
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 4
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -445,7 +445,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/AttackSkin/Prefab/Bullet
+    - Assets/Scripts/Game
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 0
@@ -460,7 +460,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: f06f0000
     m_LastClickedID: 28656
-    m_ExpandedIDs: 00000000f06f0000f26f0000f46f0000f66f0000f86f0000fa6f0000fc6f0000007000000270000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000f86f0000fa6f0000fc6f0000fe6f000000700000027000000470000006700000087000000a7000000c7000000e7000001070000012700000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -485,24 +485,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 0}
+    scrollPos: {x: 0, y: 488.2}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000f06f0000f46f0000f86f00000070000002700000487000004c70000064700000f2700000fe7000000071000052710000227900003cac0000
+    m_ExpandedIDs: ffffffff00000000f86f0000fc6f0000fe6f000006700000087000000a7000000e700000107000006c7000006e70000078700000908200006e8d0000e493000090960000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Seeker1
-      m_OriginalName: Seeker1
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 52776
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 9}
     m_SearchString: 
@@ -916,9 +916,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.7736982, y: 1.0763323, z: -0.013630397}
+    m_Target: {x: -1.2913568, y: -0.94052476, z: -0.18621704}
     speed: 2
-    m_Value: {x: 0.102184296, y: -0.06283218, z: -0.009547363}
+    m_Value: {x: -1.2913568, y: -0.94052476, z: -0.18621704}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -969,9 +969,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 0.8250421
+    m_Target: 1.1785169
     speed: 2
-    m_Value: 0.43215805
+    m_Value: 1.1785169
   m_Ortho:
     m_Target: 1
     speed: 2

@@ -18,7 +18,7 @@ public class AttackBody : MonoBehaviour
 
     public bool isVaild = false;//유효할때만 히트판정(이미 히트한 바디는 재사용 불가)
     public bool isSeek = false;
-    public Transform trTarget;
+    public MonsterUnit target;
 
     public const string TAG_MONSTER = "Monster";
 
@@ -39,7 +39,7 @@ public class AttackBody : MonoBehaviour
         {
             if (isSeek)
             {
-                if (collision.transform != trTarget)
+                if (collision.transform != target.transform)
                     return;
             }
 
@@ -61,10 +61,15 @@ public class AttackBody : MonoBehaviour
 
     private void Update_SeekTarget()
     {
-        if (trTarget == null)
+        if (Util.IsVaildMonster(target) == false)
+        {
+            isVaild = false;
+            isSeek = false;
+            DespawnBody();
             return;
+        }
 
-        var dir = trTarget.position - transform.position;
+        var dir = target.transform.position - transform.position;
         dir = Vector3.Normalize(dir);
         var delta = dir * stat.bulletSpeed * Time.deltaTime;
 

@@ -64,7 +64,7 @@ public class SeekAttack : TowerAttack
         body.stat = stat;
         body.prefab = prefab;
         body.isSeek = true;
-        body.trTarget = _target.transform;
+        body.target = _target;
 
         body.InitBody();
     }
