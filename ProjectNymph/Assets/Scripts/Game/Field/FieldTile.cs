@@ -46,6 +46,8 @@ public class FieldTile : MonoBehaviour
         goHighlight.SetActive(false);
         goSelected.SetActive(false);
         RefreshName();
+
+        if (Tower != null) Tower.HideRange();
     }
 
     public void SpawnTower()
@@ -75,7 +77,6 @@ public class FieldTile : MonoBehaviour
         _tower.transform.SetParent(this.transform);
         _tower.transform.localPosition = Vector3.zero;
         Tower = _tower;
-        Tower.HideRange();
         Refresh();
         return true;
     }

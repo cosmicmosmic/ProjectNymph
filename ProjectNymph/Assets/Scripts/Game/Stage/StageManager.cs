@@ -60,22 +60,34 @@ public class StageManager : MonoBehaviour
         currStageDB = db;
     }
 
-    public void ResetWave()
+    public void StartWave(int _round)
     {
-        waveIndex = 0;
+        waveIndex = _round;
+        currWaveDB = GetWaveDB();
+        StartCurrWave();
+    }
+
+    public void StartWave(WaveDB _db)
+    {
+        currWaveDB = _db;
         StartCurrWave();
     }
 
     public void NextWave()
     {
         waveIndex++;
+        currWaveDB = GetWaveDB();
         StartCurrWave();
     }
 
-    public void StartWave(int _round)
+    public void ClearWave()
     {
-        waveIndex = _round;
-        StartCurrWave();
+        StopAllCoroutines();
+        for (int i = listMon.Count - 1; i >= 0; --i)
+        {
+            var mon = listMon[i];
+            mon.DespawnUnit();
+        }
     }
 
     private WaveDB GetWaveDB()
@@ -91,8 +103,6 @@ public class StageManager : MonoBehaviour
 
     private void StartCurrWave()
     {
-        currWaveDB = GetWaveDB();
-        listMon.Clear();
         if (currWaveDB == null)
             return;
 
@@ -112,7 +122,12 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < info.spawnCount; i++)
         {
             var mon = spawnPoint.SpawnMonster(info.monsterId, trMonsterSpawnRoot);
-            listMon.Add(mon);
+            if (mon != null)
+            {
+                mon.onDespawn = () => listMon.Remove(mon);
+                listMon.Add(mon);
+            }
+
             yield return wait;
         }
     }

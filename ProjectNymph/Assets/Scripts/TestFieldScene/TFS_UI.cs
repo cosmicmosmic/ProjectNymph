@@ -4,33 +4,31 @@ using UnityEngine;
 
 public class TFS_UI : MonoBehaviour
 {
-    public GameObject goBottomButtons;
     public TFS_TowerMaker towerMaker;
+    public TFS_WaveMaker waveMaker;
     public TileActionButton tileActionButton;
+
 
     public void InitUI()
     {
         towerMaker.InitMaker();
-        towerMaker.gameObject.SetActive(false);
-        goBottomButtons.SetActive(true);
+        waveMaker.InitMaker();
         tileActionButton.Close();
     }
 
-    public void Test_OnClickStart()
+    public void OnClickResetAll()
     {
-        FM.Inst.stageMgr.SetStage("1");
-        FM.Inst.stageMgr.StartWave(0);
+        FM.Inst.stageMgr.ClearWave();
+        TestFieldScene.Inst.ClearAllTowers();
     }
 
-    public void OnClickOpenTowerMaker()
+    public void OnClickResetTower()
     {
-        towerMaker.gameObject.SetActive(true);
-        goBottomButtons.SetActive(false);
+        TestFieldScene.Inst.ClearAllTowers();
     }
 
-    public void OnClickCloseTowerMaker()
+    public void OnClickResetWave()
     {
-        towerMaker.gameObject.SetActive(false);
-        goBottomButtons.SetActive(true);
+        FM.Inst.stageMgr.ClearWave();
     }
 }

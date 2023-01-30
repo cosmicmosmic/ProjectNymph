@@ -8,11 +8,10 @@ public class TowerUnit : MonoBehaviour
     public TowerStat stat;
     [SerializeField] private TowerAttackShooter shooter;
     [SerializeField] private Animator anim;
+    private SpriteRenderer spr;
+    private TowerRangeSupporter rangeSupport;
 
     public E_TowerState State { get; private set; }
-    private TowerRangeSupporter rangeSupport;
-    private SpriteRenderer spr;
-
     private float currDelayTime = 0f;
     private MonsterUnit followingTarget = null;
 
@@ -45,6 +44,8 @@ public class TowerUnit : MonoBehaviour
         shooter.InitShooter(stat, _db.attack_id);
 
         State = E_TowerState.IDLE;
+        currDelayTime = 0f;
+        followingTarget = null;
     }
 
     public void StartWork()

@@ -7,6 +7,11 @@ public class TFS_TowerDropper : MonoBehaviour
     [SerializeField] private Camera cam;
     private TowerUnit towerGrabbed = null;
 
+    public bool IsGrabbed()
+    {
+        return towerGrabbed;
+    }
+
     public void SpawnTower(TowerDB _db)
     {
         if (towerGrabbed != null)

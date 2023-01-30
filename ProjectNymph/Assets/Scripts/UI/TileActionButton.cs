@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class TileActionButton : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class TileActionButton : MonoBehaviour
     [SerializeField] private RectTransform parent;
 
     private FieldTile currTile = null;
+
+    public Action onClose = null;
 
     private void Awake()
     {
@@ -47,6 +50,12 @@ public class TileActionButton : MonoBehaviour
             currTile.Tower.HideRange();
         }
         currTile = null;
+
+        if (onClose != null)
+        {
+            onClose();
+        }
+
         gameObject.SetActive(false);
     }
 }

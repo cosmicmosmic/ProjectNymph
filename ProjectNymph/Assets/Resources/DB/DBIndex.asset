@@ -30,17 +30,23 @@ MonoBehaviour:
     move_speed: 0.06
   towerDB:
   - id: 10001
-    res_id: Cat
+    res_id: Fire
     attack_id: Attack1
     attack_point: 1
     attack_delay: 0.5
     range: 1.8
   - id: 10002
-    res_id: Cat
+    res_id: Plant
     attack_id: Attack2
     attack_point: 0
     attack_delay: 1.2
     range: 2.5
+  - id: 10003
+    res_id: Water
+    attack_id: Attack3
+    attack_point: 0
+    attack_delay: 0.6
+    range: 2
   attackDB:
   - id: Attack1
     res_id: Bullet1
@@ -52,6 +58,11 @@ MonoBehaviour:
     attack_type: 1
     attack_point: 1
     bullet_speed: 1.3
+  - id: Attack3
+    res_id: Seeker1
+    attack_type: 1
+    attack_point: 1
+    bullet_speed: 3.8
   stageDB:
   - id: 1
     wave_list:
@@ -70,8 +81,8 @@ MonoBehaviour:
     - 3:20001:15
   - id: W3
     monsters:
-    - 1:20001:15
-    - 2:20001:15
+    - 1:20002:15
+    - 2:20003:15
   - id: W4
     monsters:
-    - 3:20001:30
+    - 3:20003:30

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameType;
+using System;
 
 public class MonsterUnit : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class MonsterUnit : MonoBehaviour
     [SerializeField] private MonsterHpSupporter hp;
     [SerializeField] private MonsterRangeSupporter range;
 
+
+    public Action onDespawn = null;
     public E_MonsterState State { get; private set; }
     private List<MonsterRallyPoint> listRally = new List<MonsterRallyPoint>();
     private int currRallyIndex = 0;
@@ -260,6 +263,11 @@ public class MonsterUnit : MonoBehaviour
     {
         if (prefabOrigin == null)
             return;
+
+        if (onDespawn != null)
+        {
+            onDespawn();
+        }
 
         State = E_MonsterState.IDLE;
         ObjectPool.Inst.Despawn(prefabOrigin, gameObject);

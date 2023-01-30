@@ -18,8 +18,17 @@ public class TestFieldScene : GameObjectSingleton<TestFieldScene>
 
         listFieldTiles = FM.Inst.fieldGen.GenerateField();
         SetOnClickFieldEmptyTile(towerDropper.DropTower);
-        SetOnClickFieldTowerTile(ui.tileActionButton.ShowButton);
 
+        SetOnClickFieldTowerTile((tile) =>
+        {
+            if (towerDropper.IsGrabbed())
+                return;
+
+            HideAllRanges();
+            ui.tileActionButton.ShowButton(tile);
+        });
+
+        ui.tileActionButton.onClose = HideAllRanges;
         ui.InitUI();
     }
 
@@ -44,6 +53,30 @@ public class TestFieldScene : GameObjectSingleton<TestFieldScene>
         {
             var tile = listFieldTiles[i];
             tile.onClickTowerTile = _onClickFieldTile;
+        }
+    }
+
+    public void HideAllRanges()
+    {
+        for (int i = 0; i < listFieldTiles.Count; i++)
+        {
+            var tile = listFieldTiles[i];
+            if (tile.Tower != null)
+            {
+                tile.Tower.HideRange();
+            }
+        }
+    }
+
+    public void ClearAllTowers()
+    {
+        for (int i = 0; i < listFieldTiles.Count; i++)
+        {
+            var tile = listFieldTiles[i];
+            if (tile.Tower != null)
+            {
+                tile.RemoveTower();
+            }
         }
     }
 }
