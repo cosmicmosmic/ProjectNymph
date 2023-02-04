@@ -50,20 +50,20 @@ public class FieldTile : MonoBehaviour
         if (Tower != null) Tower.HideRange();
     }
 
-    public void SpawnTower()
+    public void SpawnTower(TowerDB _db)
     {
-
-    }
-
-    public void RemoveTower()
-    {
-        if (Tower == null)
+        if (_db == null)
             return;
 
-        Destroy(Tower.gameObject);
-        Tower = null;
+        var tower = TowerInstancer.Inst.InstantiateTower(_db);
+        DropTower(tower);
+    }
 
-        Refresh();
+    public void SpawnRandomTower()
+    {
+        var rndDB = DB.Inst.GetRandomTowerDB();
+        var tower = TowerInstancer.Inst.InstantiateTower(rndDB);
+        DropTower(tower);
     }
 
     public bool DropTower(TowerUnit _tower)
@@ -79,6 +79,17 @@ public class FieldTile : MonoBehaviour
         Tower = _tower;
         Refresh();
         return true;
+    }
+
+    public void RemoveTower()
+    {
+        if (Tower == null)
+            return;
+
+        Destroy(Tower.gameObject);
+        Tower = null;
+
+        Refresh();
     }
 
     public void SelectTile(bool _value)

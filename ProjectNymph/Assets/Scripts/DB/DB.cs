@@ -64,6 +64,7 @@ public class DB : Singleton<DB>
     public Dictionary<string, StageDB> dicStageDB = new Dictionary<string, StageDB>();
     public Dictionary<string, WaveDB> dicWaveDB = new Dictionary<string, WaveDB>();
 
+    private List<TowerDB> listTowerDB = new List<TowerDB>();
 
     public void Init()
     {
@@ -98,6 +99,7 @@ public class DB : Singleton<DB>
     private void LoadTowerDB()
     {
         dicTowerDB.Clear();
+        listTowerDB.Clear();
         var towers = index.towerDB;
         for (int i = 0; i < towers.Length; i++)
         {
@@ -109,6 +111,7 @@ public class DB : Singleton<DB>
             else
             {
                 dicTowerDB.Add(db.id, db);
+                listTowerDB.Add(db);
             }
         }
     }
@@ -189,6 +192,13 @@ public class DB : Singleton<DB>
         {
             return null;
         }
+    }
+
+    public TowerDB GetRandomTowerDB()
+    {
+        var cnt = listTowerDB.Count;
+        var rnd = UnityEngine.Random.Range(0, cnt);
+        return listTowerDB[rnd];
     }
 
     public AttackDB GetAttackDB(string _id)

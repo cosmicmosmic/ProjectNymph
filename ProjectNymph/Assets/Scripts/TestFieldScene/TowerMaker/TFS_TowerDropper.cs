@@ -17,10 +17,11 @@ public class TFS_TowerDropper : MonoBehaviour
         if (towerGrabbed != null)
             return;
 
-        towerGrabbed = Instantiate(Resources.Load<TowerUnit>(GetTowerDir(_db.res_id)), transform);
+        towerGrabbed = TowerInstancer.Inst.InstantiateTower(_db);
+        towerGrabbed.transform.SetParent(transform);
+        towerGrabbed.transform.localPosition = Vector3.zero;
         if (towerGrabbed != null)
         {
-            towerGrabbed.InitTower(_db);
             towerGrabbed.ShowRange();
         }
     }
@@ -44,11 +45,6 @@ public class TFS_TowerDropper : MonoBehaviour
 
         Destroy(towerGrabbed.gameObject);
         towerGrabbed = null;
-    }
-
-    private string GetTowerDir(string _resId)
-    {
-        return string.Concat("TowerUnits/", _resId);
     }
 
     private void Update()
