@@ -613,7 +613,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.59280616, g: 0.8396226, b: 0.39921677, a: 0}
+  m_BackGroundColor: {r: 0, g: 0.2988016, b: 0.5283019, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1199,6 +1199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 587672813}
+  - component: {fileID: 587672814}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -1227,6 +1228,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &587672814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587672812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e908622d6964c140b1a7fef9470e79e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txtTimer: {fileID: 672756951}
 --- !u!1 &610984250
 GameObject:
   m_ObjectHideFlags: 0
@@ -1529,6 +1543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 744709867}
+  - component: {fileID: 744709868}
   m_Layer: 5
   m_Name: countGold
   m_TagString: Untagged
@@ -1558,6 +1573,20 @@ RectTransform:
   m_AnchoredPosition: {x: 65, y: 100}
   m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &744709868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744709866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd1716beb1474c24db8f4ea6efa1a8d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ptScene: {fileID: 1690986844}
+  txt: {fileID: 1087221462}
 --- !u!1 &849780956
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,6 +2055,7 @@ GameObject:
   - component: {fileID: 1079728111}
   - component: {fileID: 1079728113}
   - component: {fileID: 1079728112}
+  - component: {fileID: 1079728114}
   m_Layer: 5
   m_Name: ButtonStart
   m_TagString: Untagged
@@ -2075,7 +2105,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2099,7 +2129,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 587672814}
+        m_TargetAssemblyTypeName: Pt_StartTimerButton, Assembly-CSharp
+        m_MethodName: OnClickStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1079728113
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2108,6 +2150,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079728110}
   m_CullTransparentMesh: 1
+--- !u!95 &1079728114
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079728110}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f24de9fc3c00f2e428d851d11cb9e862, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1087221460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2296,7 +2358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
   root: {fileID: 1880749513}
-  parent: {fileID: 0}
+  parent: {fileID: 1174868047}
 --- !u!1 &1226835825
 GameObject:
   m_ObjectHideFlags: 0
@@ -7418,7 +7480,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f4dbee0d0376644bb3bc8bb26d9f4d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileActionButton: {fileID: 0}
+  tileActionButton: {fileID: 1174868048}
+  goldChecker: {fileID: 744709868}
+  startTimer: {fileID: 587672814}
 --- !u!1 &1839990757
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TowerInstancer : GameObjectSingleton<TowerInstancer>
 {
-    private List<TowerDB> listTowerDB = null;
-
     public TowerUnit InstantiateTower(string _id)
     {
         return InstantiateTower(DB.Inst.GetTowerDB(_id));

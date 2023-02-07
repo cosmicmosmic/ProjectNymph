@@ -5,9 +5,12 @@ using UnityEngine;
 public class Pt_UI : MonoBehaviour
 {
     public TileActionButton tileActionButton;
+    public Pt_GoldCountChecker goldChecker;
+    public Pt_StartTimerButton startTimer;
 
-    public void OnClickStart()
+
+    public void Init()
     {
-
+        goldChecker.Init();
     }
 }

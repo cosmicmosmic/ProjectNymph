@@ -58,12 +58,13 @@ public class StageManager : MonoBehaviour
             return;
 
         currStageDB = db;
+        waveIndex = -1;
     }
 
     public void StartWave(int _round)
     {
         waveIndex = _round;
-        currWaveDB = GetWaveDB();
+        currWaveDB = GetCurrWaveDB();
         StartCurrWave();
     }
 
@@ -73,11 +74,15 @@ public class StageManager : MonoBehaviour
         StartCurrWave();
     }
 
-    public void NextWave()
+    public bool NextWave()
     {
         waveIndex++;
-        currWaveDB = GetWaveDB();
+        currWaveDB = GetCurrWaveDB();
+        if (currWaveDB == null)
+            return false;
+
         StartCurrWave();
+        return true;
     }
 
     public void ClearWave()
@@ -90,7 +95,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    private WaveDB GetWaveDB()
+    private WaveDB GetCurrWaveDB()
     {
         if (currStageDB == null)
             return null;
