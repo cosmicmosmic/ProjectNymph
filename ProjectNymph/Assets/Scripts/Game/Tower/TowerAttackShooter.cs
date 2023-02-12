@@ -35,7 +35,7 @@ public class BulletAttack : TowerAttack
 
         var dir = _target.transform.position - _shooter.transform.position;
         dir = Vector3.Normalize(dir);
-        var targetPos = dir * 10;
+        var targetPos = dir * 10 + _shooter.transform.position;
         var dist = Vector2.Distance(_shooter.transform.position, targetPos);
         var duration = dist / attackDB.bullet_speed;
         body.tween = goBullet.transform.DOMove(targetPos, duration);
@@ -113,9 +113,9 @@ public class TowerAttackShooter : MonoBehaviour
 
         switch (attackDB.attack_type)
         {
-            case E_AttackType.BULLET:
-                attack = new BulletAttack();
-                break;
+            //case E_AttackType.BULLET:
+            //    attack = new BulletAttack();
+            //    break;
             case E_AttackType.SEEK:
                 attack = new SeekAttack();
                 break;

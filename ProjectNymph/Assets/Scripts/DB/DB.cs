@@ -1,87 +1,103 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameType;
+using UGS;
+using GoogleSheet;
 using System;
-
-[Serializable]
-public class MonsterDB
-{
-    public string id;
-    public string res_id;
-    public long health_point;
-    public long defense_point;
-    public float move_speed;
-}
-
-[Serializable]
-public class TowerDB
-{
-    public string id;
-    public string res_id;
-    public string attack_id;
-
-    public long attack_point;//공격력
-    public float attack_delay;//딜레이
-    public float range;//사거리
-}
-
-[Serializable]
-public class AttackDB
-{
-    public string id;
-    public string res_id;
-
-    public E_AttackType attack_type;
-
-    public long attack_point;
-    public float bullet_speed;
-
-}
-
-[Serializable]
-public class WaveDB
-{
-    public string id;
-    public string[] monsters;
-}
-
-[Serializable]
-public class StageDB
-{
-    public string id;
-    public string[] wave_list;
-}
 
 public class DB : Singleton<DB>
 {
     public DBConst Const;
     public DefaultResource Res;
-    private DBIndex index;
+
+    public MonsterDB[] arrMonDB;
+    public TowerDB[] arrTowerDB;
+    public AttackDB[] arrAttackDB;
+    public StageDB[] arrStageDB;
+    public WaveDB[] arrWaveDB;
+
     public Dictionary<string, MonsterDB> dicMonDB = new Dictionary<string, MonsterDB>();
     public Dictionary<string, TowerDB> dicTowerDB = new Dictionary<string, TowerDB>();
     public Dictionary<string, AttackDB> dicAttackDB = new Dictionary<string, AttackDB>();
     public Dictionary<string, StageDB> dicStageDB = new Dictionary<string, StageDB>();
     public Dictionary<string, WaveDB> dicWaveDB = new Dictionary<string, WaveDB>();
 
-    private List<TowerDB> listTowerDB = new List<TowerDB>();
-
     public void Init()
     {
         Const = Resources.Load<DBConst>("DB/DBConst");
         Res = Resources.Load<DefaultResource>("DefaultResource");
-        index = Resources.Load<DBIndex>("DB/DBIndex");
-        LoadMonsterDB();
-        LoadTowerDB();
-        LoadAttackDB();
-        LoadStageDB();
-        LoadWaveDB();
+
+        LoadLocalDB();
     }
 
-    private void LoadMonsterDB()
+    public void LoadLocalDB()
+    {
+        UnityGoogleSheet.LoadAllData();
+        LoadMonsterDB(ModifyBaseDB<MonsterDB, SheetData.MonsterDB>(SheetData.MonsterDB.GetList()));
+        LoadTowerDB(ModifyBaseDB<TowerDB, SheetData.TowerDB>(SheetData.TowerDB.GetList()));
+        LoadAttackDB(ModifyBaseDB<AttackDB, SheetData.AttackDB>(SheetData.AttackDB.GetList()));
+        LoadStageDB(ModifyBaseDB<StageDB, SheetData.StageDB>(SheetData.StageDB.GetList()));
+        LoadWaveDB(ModifyBaseDB<WaveDB, SheetData.WaveDB>(SheetData.WaveDB.GetList()));
+    }
+
+    public void LoadGoogleSheetDBAll()
+    {
+        LoadSheetDB<MonsterDB, SheetData.MonsterDB>(LoadMonsterDB);
+        LoadSheetDB<TowerDB, SheetData.TowerDB>(LoadTowerDB);
+        LoadSheetDB<AttackDB, SheetData.AttackDB>(LoadAttackDB);
+        LoadSheetDB<StageDB, SheetData.StageDB>(LoadStageDB);
+        LoadSheetDB<WaveDB, SheetData.WaveDB>(LoadWaveDB);
+    }
+
+    public T[] ModifyBaseDB<T, U>(List<U> _list) where U : ITable where T : BaseDB, new()
+    {
+        var list = _list;
+        if (list != null)
+        {
+            var arr = new T[list.Count];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                var db = new T();
+                db.OverwriteSheetDB(list[i]);
+                arr[i] = db;
+            }
+
+            return arr;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public void LoadSheetDB<T, U>(Action<T[]> _onCompleteLoad) where U : ITable where T : BaseDB, new()
+    {
+        UnityGoogleSheet.LoadFromGoogle<string, U>((list, map) =>
+        {
+            if (list != null)
+            {
+                var arr = new T[list.Count];
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    var db = new T();
+                    db.OverwriteSheetDB(list[i]);
+                    arr[i] = db;
+                }
+
+                if (_onCompleteLoad != null)
+                {
+                    _onCompleteLoad(arr);
+                    Debug.Log("구글시트 로드 : " + typeof(T));
+                }
+            }
+
+        }, true);
+    }
+
+    private void LoadMonsterDB(MonsterDB[] _arr)
     {
         dicMonDB.Clear();
-        var monsters = index.monsterDB;
+        var monsters = _arr;
         for (int i = 0; i < monsters.Length; i++)
         {
             var db = monsters[i];
@@ -94,13 +110,15 @@ public class DB : Singleton<DB>
                 dicMonDB.Add(db.id, db);
             }
         }
+
+        arrMonDB = _arr;
+        if (DBLoader.Inst != null) DBLoader.Inst.monsterDB = _arr;
     }
 
-    private void LoadTowerDB()
+    private void LoadTowerDB(TowerDB[] _arr)
     {
         dicTowerDB.Clear();
-        listTowerDB.Clear();
-        var towers = index.towerDB;
+        var towers = _arr;
         for (int i = 0; i < towers.Length; i++)
         {
             var db = towers[i];
@@ -111,15 +129,17 @@ public class DB : Singleton<DB>
             else
             {
                 dicTowerDB.Add(db.id, db);
-                listTowerDB.Add(db);
             }
         }
+
+        arrTowerDB = _arr;
+        if (DBLoader.Inst != null) DBLoader.Inst.towerDB = _arr;
     }
 
-    private void LoadAttackDB()
+    private void LoadAttackDB(AttackDB[] _arr)
     {
         dicAttackDB.Clear();
-        var attacks = index.attackDB;
+        var attacks = _arr;
         for (int i = 0; i < attacks.Length; i++)
         {
             var db = attacks[i];
@@ -132,12 +152,15 @@ public class DB : Singleton<DB>
                 dicAttackDB.Add(db.id, db);
             }
         }
+
+        arrAttackDB = _arr;
+        if (DBLoader.Inst != null) DBLoader.Inst.attackDB = _arr;
     }
 
-    private void LoadStageDB()
+    private void LoadStageDB(StageDB[] _arr)
     {
         dicStageDB.Clear();
-        var stages = index.stageDB;
+        var stages = _arr;
         for (int i = 0; i < stages.Length; i++)
         {
             var db = stages[i];
@@ -150,12 +173,15 @@ public class DB : Singleton<DB>
                 dicStageDB.Add(db.id, db);
             }
         }
+
+        arrStageDB = _arr;
+        if (DBLoader.Inst != null) DBLoader.Inst.stageDB = _arr;
     }
 
-    private void LoadWaveDB()
+    private void LoadWaveDB(WaveDB[] _arr)
     {
         dicWaveDB.Clear();
-        var waves = index.waveDB;
+        var waves = _arr;
         for (int i = 0; i < waves.Length; i++)
         {
             var db = waves[i];
@@ -168,6 +194,9 @@ public class DB : Singleton<DB>
                 dicWaveDB.Add(db.id, db);
             }
         }
+
+        arrWaveDB = _arr;
+        if (DBLoader.Inst != null) DBLoader.Inst.waveDB = _arr;
     }
 
     public MonsterDB GetMonsterDB(string _id)
@@ -196,9 +225,9 @@ public class DB : Singleton<DB>
 
     public TowerDB GetRandomTowerDB()
     {
-        var cnt = listTowerDB.Count;
-        var rnd = UnityEngine.Random.Range(0, cnt);
-        return listTowerDB[rnd];
+        var len = arrTowerDB.Length;
+        var rnd = UnityEngine.Random.Range(0, len);
+        return arrTowerDB[rnd];
     }
 
     public AttackDB GetAttackDB(string _id)

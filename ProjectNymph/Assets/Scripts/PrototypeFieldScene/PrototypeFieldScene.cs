@@ -52,6 +52,10 @@ public class PrototypeFieldScene : MonoBehaviour
         var tile = listFieldTiles[rnd];
 
         tile.SpawnRandomTower();
+        if (tile.Tower != null)
+        {
+            tile.Tower.StartWork();
+        }
     }
 
     private void StartWave()

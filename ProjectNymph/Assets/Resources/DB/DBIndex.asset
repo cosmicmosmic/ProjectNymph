@@ -52,15 +52,15 @@ MonoBehaviour:
     res_id: Bullet1
     attack_type: 0
     attack_point: 1
-    bullet_speed: 2
+    bullet_speed: 10
   - id: Attack2
     res_id: Seeker1
-    attack_type: 1
+    attack_type: 0
     attack_point: 1
     bullet_speed: 1.3
   - id: Attack3
     res_id: Seeker1
-    attack_type: 1
+    attack_type: 0
     attack_point: 1
     bullet_speed: 3.8
   stageDB:

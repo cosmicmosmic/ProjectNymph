@@ -18,7 +18,7 @@ namespace GameType
 
     public enum E_AttackType
     {
-        BULLET,//직선방향으로 쭉 나아감
+        //BULLET,//직선방향으로 쭉 나아감
         SEEK,//적을 따라다니면서 유도함
         BOMB,
         LASER,
